@@ -1,9 +1,10 @@
 # api-email
 
 ### Run
-1. Run go get github.com/lizzle-shizzle/api-email/api 
-2. Run ./build.sh
-3. Run docker-compose up
+1. Run go get github.com/lizzle-shizzle/api-email/api
+2. Run chmod u+x build.sh in project directory
+3. Run ./build.sh
+4. Run docker-compose up
 
 ### Endpoints
 - POST localhost:8080/email
