@@ -1,0 +1,36 @@
+version: '3'
+services:
+  email-db:
+    image: "centos/postgresql-95-centos7"
+    environment:
+      - POSTGRESQL_USER=postgres
+      - POSTGRESQL_PASSWORD=admin
+      - POSTGRESQL_DATABASE=postgres
+    ports:
+      - "6002:5432"
+    networks:
+      main:
+        aliases:
+          - email-db
+  api-email:
+    image: "api-email"
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=email-db
+      - DB_DATABASE=postgres
+      - DB_USERNAME=postgres
+      - DB_PORT=5432
+      - DB_PASSWORD=admin
+      - SQL_INIT_PATH=init.sql
+    depends_on:
+      - email-db
+    links:
+      - email-db
+    networks:
+      main:
+        aliases:
+          - api-email
+    tty: true
+networks:
+  main:
